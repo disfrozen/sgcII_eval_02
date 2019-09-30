@@ -20,34 +20,35 @@
 
     <script>
         // Referencia de programación: https://youtu.be/5-ptp9tRApM
+        // Fuente de datos: https://data.giss.nasa.gov/gistemp/
         var data;
         var etiquetas = [];
         var sunmoon = [];
-        var smultra = [];
+        var ultra = [];
+        var mundo = [];
 
         function preload() {
             data = loadTable('https://raw.githubusercontent.com/disfrozen/sgcII_eval_02/gh-pages/ferrothorn.csv', 'csv', 'header');
         }
 
         function setup() {
+            //relleno unos arreglos []
             noCanvas();
             for (var i = 0; i < data.getRowCount(); i++) {
                 etiquetas.push(Number(data.get(i, 2)));
-            if ( i < 12) {
-                sunmoon.push(Number(data.get(i, 3)));
-            } else {
-                smultra.push(Number(data.get(i, 3)));
+                sunmoon.push(Number(data.get(i, 2)) + 14);
+                ultra.push(Number(data.get(i, 3)) + 14);
             }
+            console.log(mundo);
 
-          }
-
+            //creo el gráfico con chart.js dentro del setup de p5.js
             new Chart(document.getElementById('chart').getContext('2d'), {
                 type: 'line',
                 data: {
                     labels: etiquetas,
                     datasets: [{
                         label: 'Gen 7 - Sun & Moon',
-                        backgroundColor: 'rgba(80, 50, 230,.1)',
+                        backgroundColor: 'rgbargb(80, 50, 230,.1)',
                         borderColor: 'rgb(80, 50, 230)',
                         borderWidth: 2,
                         pointRadius: 2,
@@ -60,7 +61,7 @@
                         borderWidth: 2,
                         pointRadius: 2,
                         lineTension: 0,
-                        data: smultra
+                        data: ultra
                     }]
                 },
                 options: {
@@ -68,7 +69,7 @@
                         yAxes: [{
                             ticks: {
                                 callback: function(value, index, values) {
-                                    return value;
+                                    return value + ' º';
                                 }
                             }
                         }]
