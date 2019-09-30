@@ -20,26 +20,26 @@
 
     <script>
         // Referencia de programación: https://youtu.be/5-ptp9tRApM
-        var data;
+        var sumo;
+        var usum;
         var etiquetas = [];
         var sunmoon = [];
         var smultra = [];
 
         function preload() {
-            data = loadTable('https://raw.githubusercontent.com/disfrozen/sgcII_eval_02/gh-pages/ferrothorn.csv', 'csv', 'header');
+            sumo = loadTable('https://raw.githubusercontent.com/disfrozen/sgcII_eval_02/gh-pages/ferrothorn1.csv', 'csv', 'header');
+            usum = loadTable('https://raw.githubusercontent.com/disfrozen/sgcII_eval_02/gh-pages/ferrothorn2.csv', 'csv', 'header');
         }
 
         function setup() {
             noCanvas();
-            for (var i = 0; i < data.getRowCount(); i++) {
-                etiquetas.push(Number(data.get(i, 2)));
-            if (i < 12) {
-                sunmoon.push(Number(data.get(i, 3)));
-            } else {
-                smultra.push(Number(data.get(i, 3)));
+            for (var i = 0; i < sumo.getRowCount(); i++) {
+                etiquetas.push(sumo.get(i, 2));
+                sunmoon.push(Number(sumo.get(i, 3)));
             }
-
-          }
+            for (var i = 0; i < usum.getRowCount(); i++) {
+                smultra.push(Number(usum.get(i, 3)));
+            }
 
             new Chart(document.getElementById('chart').getContext('2d'), {
                 type: 'line',
