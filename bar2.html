@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokémon Competitivo - Minianálisis | Top 25 Pokémon más usados</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a> <a href="chartjs-line.html">Line chart</a> <a href="bar2.html" class="actual">Top 25 en OU</a> <a href="radar.html">Stats Base</a> <a href="c3js-line.html">Line Chart</a> <a href="treemap.html">Uso en OU</a>
+    </nav>
+
+    <canvas id="chart"></canvas>
+
+    <script>
+        var data;
+        var etiquetas = [];
+        var agosto = [];
+        var julio = [];
+        var junio = [];
+
+        //Datos en - http://www.meteochile.cl/PortalDMC-web/climatologia/inicio_climatologia/informe_precipitaciones.xhtml?0.6154106731992215
+
+        function preload() {
+            data = loadTable('https://raw.githubusercontent.com/disfrozen/sgcII_eval_02/gh-pages/ou_usage.csv', 'csv', 'header');
+        }
+
+        function setup() {
+            //relleno unos arreglos []
+            noCanvas();
+            for (var i = 0; i < data.getRowCount(); i++) {
+                etiquetas.push(data.get(i, 1));
+                agosto.push(Number(data.get(i, 2)));
+                julio.push(Number(data.get(i, 3)));
+                junio.push(Number(data.get(i, 4)));
+            }
+
+            //creo el gráfico con chart.js dentro del setup de p5.js
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: etiquetas,
+                    datasets: [{
+                        label: 'Porcentaje de uso por equipo en OU (Agosto)',
+                        backgroundColor: 'rgb(0, 100, 150)',
+                        data: agosto,
+                    }, {
+                        label: 'Porcentaje de uso por equipo en OU (Julio)',
+                        backgroundColor: 'rgb(80, 50, 230)',
+                        data: julio
+                    }, {
+                        label: 'Porcentaje de uso por equipo en OU (Junio)',
+                        backgroundColor: 'rgb(0,150,200)',
+                        data: junio
+                    }]
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="style.css">
+  <title>Pokémon Competitivo - Minianálisis | Porcentaje de uso de Pokémon dentro del metagame</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3plus.org/js/d3plus-hierarchy.v0.8.full.min.js"></script>
+</head>
+
+<body>
+
+  <nav>
+      <a href="index.html">Inicio</a> <a href="chartjs-line.html">Line chart</a> <a href="bar2.html">Top 25 en OU</a> <a href="radar.html">Stats Base</a> <a href="c3js-line.html">Line Chart</a> <a href="treemap.html" class="actual">Uso en OU</a>
+  </nav>
+
+  <div id="chart"></div>
+
+  <script>
+   // Primeros 30 puestos de la lista de Pokémon según su porcentaje de uso de Smogon, del mes de Agosto 2019, publicada el 02 de Sept. de 2019.
+       var dataset = [{
+           type: "Tierra",
+           name: "Landorus-Therian",
+           percent: 37.15957
+       }, {
+           type: "Acero",
+           name: "Ferrothorn",
+           percent: 18.62993
+       }, {
+           type: "Agua",
+           name: "Greninja-Ash",
+           percent: 18.50929
+       }, {
+           type: "Acero",
+           name: "Magearna",
+           percent: 17.61039
+       }, {
+           type: "Eléctrico",
+           name: "Tapu Koko",
+           percent: 17.33895
+       }, {
+           type: "Fuego",
+           name: "Heatran",
+           percent: 15.66243
+       }, {
+           type: "Acero",
+           name: "Kartana",
+           percent: 13.40407
+       }, {
+           type: "Volador",
+           name: "Tornadus-Therian",
+           percent: 12.51936
+       }, {
+           type: "Psíquico",
+           name: "Tapu Lele",
+           percent: 11.74832
+       }, {
+           type: "Eléctrico",
+           name: "Rotom-Wash",
+           percent: 11.67548
+       }, {
+           type: "Agua",
+           name: "Toxapex",
+           percent: 10.74932
+       }, {
+           type: "Eléctrico",
+           name: "Zapdos",
+           percent: 10.50320
+       }, {
+           type: "Dragón",
+           name: "Garchomp",
+           percent: 10.28717
+       }, {
+           type: "Agua",
+           name: "Greninja",
+           percent: 10.11464
+       }, {
+           type: "Planta",
+           name: "Serperior",
+           percent: 9.65061
+       }, {
+           type: "Agua",
+           name: "Tapu Fini",
+           percent: 9.49651
+       }, {
+           type: "Tierra",
+           name: "Excadrill",
+           percent: 9.22680
+       }, {
+           type: "Planta",
+           name: "Tapu Bulu",
+           percent: 8.61920
+       }, {
+           type: "Normal",
+           name: "Chansey",
+           percent: 7.66555
+       }, {
+           type: "Tierra",
+           name: "Gliscor",
+           percent: 7.47610
+       }, {
+           type: "Fuego",
+           name: "Volcarona",
+           percent: 7.36187
+       }, {
+           type: "Eléctrico",
+           name: "Magnezone",
+           percent: 7.30687
+       }, {
+           type: "Fuego",
+           name: "Victini",
+           percent: 7.28743
+       }, {
+           type: "Acero",
+           name: "Celesteela",
+           percent: 7.16299
+       }, {
+           type: "Acero",
+           name: "Mawile-Mega",
+           percent: 7.02533
+       }, {
+           type: "Agua",
+           name: "Pelipper",
+           percent: 6.85449
+       }, {
+           type: "Normal",
+           name: "Lopunny-Mega",
+           percent: 6.79798
+       }, {
+           type: "Agua",
+           name: "Swampert-Mega",
+           percent: 6.79524
+       }, {
+           type: "Lucha",
+           name: "Medicham-Mega",
+           percent: 6.76424
+       }, {
+           type: "Psíquico",
+           name: "Alakazam-Mega",
+           percent: 6.56358
+       }];
+
+       new d3plus.Treemap()
+           .data(dataset)
+           .groupBy("name")
+           .select("#chart")
+           .sum("percent")
+           .render()
+  </script>
+</body>
+
+</html>

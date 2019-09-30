@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokémon Competitivo - Minianálisis | Comparación de stats base de Pokémon según tipo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a> <a href="chartjs-line.html">Line chart</a> <a href="bar2.html">Top 25 en OU</a> <a href="radar.html" class="actual">Stats Base</a> <a href="c3js-line.html">Line Chart</a> <a href="treemap.html">Uso en OU</a>
+    </nav>
+
+    <canvas id="chart"></canvas>
+
+    <script>
+    // Comparación de stats base de Pokémon elegidos según datos de uso del mes de Enero 2019, tomando en cuenta su estado evolutivo (base, tier1, tier2).
+        var sel;
+        function setup() {
+            noCanvas();
+
+            sel = createSelect();
+            sel.position(100, 100);
+            sel.option('Tipo Dragón', 0);
+            sel.option('Tipo Acero', 1);
+            sel.option('Tipo Fantasma', 2);
+            sel.option('Tipo Tierra', 3);
+
+            sel.changed(opciones);
+            dragon();
+        }
+
+        function opciones() {
+            clear();
+            if (sel.value() == 0) {
+                dragon();
+            } else if (sel.value() == 1) {
+                acero();
+            } else if (sel.value() == 2) {
+                fantasma();
+            } else {
+                tierra();
+            }
+        }
+
+        function dragon() {
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ["Puntos de Vida", "Ataque", "Defensa", "Ataque Especial", "Defensa Especial", "Velocidad"],
+                    datasets: [{
+                        label: "Salamence",
+                        backgroundColor: 'rgba(20, 100, 200,.1)',
+                        borderColor: '#1462c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [95, 135, 80, 110, 80, 100],
+                    }, {
+                        label: "Garchomp",
+                        backgroundColor: 'rgba(100, 20, 200,.1)',
+                        borderColor: '#6514c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [108, 130, 95, 80, 85, 102],
+                    }, {
+                        label: "Haxorus",
+                        backgroundColor: 'rgba(100, 200, 20,.1)',
+                        borderColor: '#64c814',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [76, 147, 90, 69, 70, 97],
+                    }]
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            min: 0,
+                            max: 160
+                        }
+                    }
+                }
+            });
+        }
+
+        function acero() {
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ["Puntos de Vida", "Ataque", "Defensa", "Ataque Especial", "Defensa Especial", "Velocidad"],
+                    datasets: [{
+                        label: "Scizor",
+                        backgroundColor: 'rgba(200, 60, 60,.1)',
+                        borderColor: '#c83c3c',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [70, 130, 100, 55, 80, 65],
+                    }, {
+                        label: "Lucario",
+                        backgroundColor: 'rgba(20, 100, 200,.1)',
+                        borderColor: '#1462c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [70, 110, 70, 115, 70, 90],
+                    }, {
+                        label: "Bisharp",
+                        backgroundColor: 'rgba(175, 175, 255,.1)',
+                        borderColor: '#3F51B5',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [65, 125, 100, 60, 70, 70],
+                    }]
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            min: 0,
+                            max: 160
+                        }
+                    }
+                }
+            });
+        }
+
+        function fantasma() {
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ["Puntos de Vida", "Ataque", "Defensa", "Ataque Especial", "Defensa Especial", "Velocidad"],
+                    datasets: [{
+                        label: "Gengar",
+                        backgroundColor: 'rgba(100, 20, 200,.1)',
+                        borderColor: '#6514c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [60, 65, 60, 130, 75, 110],
+                    }, {
+                        label: "Chandelure",
+                        backgroundColor: 'rgba(80, 20, 200,.1)',
+                        borderColor: '#9C27B0',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [60, 55, 90, 145, 90, 80],
+                    }, {
+                        label: "Decidueye",
+                        backgroundColor: 'rgba(100, 200, 20,.1)',
+                        borderColor: '#64c814',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [78, 107, 75, 100, 100, 70],
+                    }]
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            min: 0,
+                            max: 160
+                        }
+                    }
+                }
+            });
+        }
+
+        function tierra() {
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ["Puntos de Vida", "Ataque", "Defensa", "Ataque Especial", "Defensa Especial", "Velocidad"],
+                    datasets: [{
+                        label: "Gliscor",
+                        backgroundColor: 'rgba(100, 20, 200,.1)',
+                        borderColor: '#6514c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [75, 95, 125, 45, 75, 95],
+                    }, {
+                        label: "Excadrill",
+                        backgroundColor: 'rgba(200, 60, 60,.1)',
+                        borderColor: '#c83c3c',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [110, 135, 60, 50, 65, 88],
+                    }, {
+                        label: "Golurk",
+                        backgroundColor: 'rgba(20, 100, 200,.1)',
+                        borderColor: '#1462c8',
+                        borderWidth: 1,
+                        pointRadius: 1,
+                        lineTension: 0,
+                        data: [89, 124, 80, 55, 80, 55],
+                    }]
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            min: 0,
+                            max: 160
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
