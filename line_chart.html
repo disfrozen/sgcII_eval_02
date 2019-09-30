@@ -13,7 +13,7 @@
 <body>
 
     <nav>
-        <a href="index.html">Inicio</a> <a href="radar.html">Stats Base</a> <a href="line_chart.html" class="actual">Ferrothorn en Gen7</a> <a href="line_c3.html">Lando-T en USUM</a> <a href="bar2.html">Top 25 en OU</a> <a href="treemap.html">Uso en OU</a>
+        <a href="index.html">Inicio</a><a href="radar.html">Stats Base</a><a href="line_chart.html" class="actual">Ferrothorn</a><a href="line_c3.html">Lando-T</a><a href="bar2.html">Top 25 OU</a><a href="treemap.html">OverUsed</a>
     </nav>
 
     <canvas id="chart"></canvas>
@@ -33,7 +33,7 @@
             noCanvas();
             for (var i = 0; i < data.getRowCount(); i++) {
                 etiquetas.push(Number(data.get(i, 2)));
-            if ( i < 12) {
+            if (i < 12) {
                 sunmoon.push(Number(data.get(i, 3)));
             } else {
                 smultra.push(Number(data.get(i, 3)));
